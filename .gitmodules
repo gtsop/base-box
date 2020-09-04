@@ -1,9 +1,9 @@
 [submodule "lib/bats-core"]
-	path = lib/bats-core
-	url = https://github.com/bats-core/bats-core
+  path = lib/bats-core
+  url = https://github.com/bats-core/bats-core
 [submodule "lib/piu"]
-	path = lib/piu
-	url = https://github.com/keithieopia/piu
+  path = lib/piu
+  url = https://github.com/gtsop/piu
 [submodule "lib/stub.sh"]
-	path = lib/stub.sh
-	url = https://github.com/jimeh/stub.sh
+  path = lib/stub.sh
+  url = https://github.com/jimeh/stub.sh

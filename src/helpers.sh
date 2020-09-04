@@ -9,7 +9,7 @@ function solution () {
   exit_message "Solution: src/solutions/$1"
 }
 
-function getOSName {
+function get_os {
   # Linux by default
   os_name="linux"
 

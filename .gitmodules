@@ -4,3 +4,6 @@
 [submodule "lib/piu"]
 	path = lib/piu
 	url = https://github.com/keithieopia/piu
+[submodule "lib/stub.sh"]
+	path = lib/stub.sh
+	url = https://github.com/jimeh/stub.sh

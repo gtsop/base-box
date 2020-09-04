@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-cd $HOME/.base-box/lib/bats-core && sudo ./install.sh /usr/local
+sudo $HOME/.base-box/lib/bats-core/install.sh /usr/local
+

@@ -1,22 +1,24 @@
 #!/usr/bin/env bats
 
+load ../lib/stub.sh/stub.sh
 load ./helpers.sh
 
-@test "getOSName works for linux" {
-  skip "no way to stub yet"
-  # stub_and_echo uname "Linux"
+@test "get_os works for linux" {
+  stub_and_echo uname "Linux"
 
-  getOSName result
+  get_os result
 
   [ "$result" == "linux" ]
 }
 
-@test "getOSName works for osx" {
-  # stub_and_echo uname "Darwin"
+@test "get_os works for osx" {
+  stub_and_echo uname "Darwin"
 
-  getOSName result
+  get_os result
 
   [ "$result" == "osx" ]
 }
 
-
+teardown() {
+  restore uname
+}

@@ -2,6 +2,12 @@
 
 load ./src/helpers.sh
 
+@test "git is installed" {
+  run which git
+
+  [ "$status" -eq 0 ] || solution "install-git.sh"
+}
+
 @test "piu is installed" {
   run which piu
 

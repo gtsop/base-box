@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 @test "piu is installed" {
-  run which pius
+  run which piu
 
   [ "$status" -eq 0 ] || {
     echo '# Suggested solution: $ ./install-piu.sh' >&2

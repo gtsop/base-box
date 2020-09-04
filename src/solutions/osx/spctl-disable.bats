@@ -12,5 +12,4 @@ load spctl-disable.sh
   stub_called_with spctl --master-disable
 
   restore spctl
-
 }

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-piu install alacritty
+piu cask install alacritty

@@ -25,3 +25,9 @@ load ./src/helpers.sh
 
   [ "$status" -eq 0 ] || solution "install-alacritty.sh"
 }
+
+@test "tmux is installed" {
+  run which tmux
+
+  [ "$status" -eq 0 ] || solution "install-tmux.sh"
+}

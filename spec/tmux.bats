@@ -31,6 +31,19 @@ setup() {
   [ "$status" -eq 0 ] || solution "tmux/h-j-k-l-select-panes.sh"
 }
 
+@test "$LABEL uses H,J,J,L to resize panes" {
+  check_resize_pane_bindings() {
+    tmux list-keys | grep " prefix " | grep " H " | grep "resize-pane -L" &&
+    tmux list-keys | grep " prefix " | grep " J " | grep "resize-pane -D" &&
+    tmux list-keys | grep " prefix " | grep " K " | grep "resize-pane -U" &&
+    tmux list-keys | grep " prefix " | grep " L " | grep "resize-pane -R"
+  }
+
+  run check_resize_pane_bindings
+
+  [ "$status" -eq 0 ] || solution "tmux/h-j-k-l-resize-panes.sh"
+}
+
 teardown() {
   tmux kill-session -t base-box-test
 }

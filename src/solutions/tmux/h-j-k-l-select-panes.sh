@@ -2,7 +2,7 @@
 
 function solution() {
 	echo "###";
-	echo "# Solution: tmux/h-j-k-l-selects-pane";
+	echo "# Solution: tmux/h-j-k-l-select-pane";
 	echo "###";
 	echo "bind h select-pane -L";
 	echo "bind j select-pane -D";

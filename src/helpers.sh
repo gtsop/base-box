@@ -22,3 +22,17 @@ function get_os {
 
   eval "$1=$os_name"
 }
+
+wrap_solution() {
+    cat << EOF
+
+###
+# Solution: $(basename ${BASH_SOURCE[1]})
+###
+$($1)
+## end
+EOF
+
+  }
+
+

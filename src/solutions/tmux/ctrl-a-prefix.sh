@@ -9,4 +9,4 @@ function solution() {
 	echo "bind C-a send-prefix";
 }
 
-solution > ~/.tmux.conf
+solution >> ~/.tmux.conf

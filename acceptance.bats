@@ -2,10 +2,6 @@
 
 load ./src/helpers.sh
 
-setup() {
-  tmux new-session -s base-box-test -d
-}
-
 @test "piu is installed" {
   run which piu
 
@@ -34,18 +30,4 @@ setup() {
   run which tmux
 
   [ "$status" -eq 0 ] || solution "install-tmux.sh"
-}
-
-@test "tmux uses Ctrl+A as the prefix" {
-  ctrl_a_bind() {
-    tmux list-keys | grep " prefix " | grep "C-a" | grep "send-prefix"
-  }
-
-  run ctrl_a_bind
-
-  [ "$status" -eq 0 ] || solution "tmux/ctrl-a-prefix.sh"
-}
-
-teardown() {
-  tmux kill-session -t base-box-test
 }

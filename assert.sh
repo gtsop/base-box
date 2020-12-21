@@ -6,6 +6,7 @@ get_os os_name
 echo "1) Cross-platform checks"
 echo ""
 bats acceptance.bats
+bats spec/tmux.bats
 
 echo "2) OS-specfic tests: $os_name"
 echo ""

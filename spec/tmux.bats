@@ -4,7 +4,7 @@ load ../src/helpers.sh
 
 LABEL="[TMUX]"
 
-setup() {
+setup_file() {
   tmux new-session -s base-box-test -d
 }
 
@@ -44,6 +44,17 @@ setup() {
   [ "$status" -eq 0 ] || solution "tmux/h-j-k-l-resize-panes.sh"
 }
 
-teardown() {
+@test "$LABEL has mouse support enabled" {
+
+  mouse_support_on() {
+    tmux display-message -p "#{mouse}" | grep "1"
+  }
+
+  run mouse_support_on
+
+  [ "$status" -eq 0 ] || solution "tmux/enable-mouse-support.sh"
+}
+
+teardown_file() {
   tmux kill-session -t base-box-test
 }

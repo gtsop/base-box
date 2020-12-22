@@ -4,17 +4,21 @@ load ../src/helpers.sh
 
 LABEL="[VIM]"
 
-tmp_dir=''
+setup_file() {
+  export tmp_dir=`mktemp -d`
 
-setup() {
-  tmp_dir=`mktemp -d`
+  vim -c "redir > $tmp_dir/scriptnames.txt | silent scriptnames | redir END" \
+      -c "redir > $tmp_dir/nmap.txt        | silent nmap        | redir END" \
+      -c "redir > $tmp_dir/imap.txt        | silent imap        | redir END" \
+      -c "redir > $tmp_dir/vmap.txt        | silent vmap        | redir END" \
+      -c "edit $tmp_dir/test.toml" \
+      -c "redir > $tmp_dir/test-toml.txt | silent set filetype? | redir END" \
+      -c q
 }
 
 @test "$LABEL loads nerdtree" {
 
   nerdtree_is_loaded() {
-    vim -c "redir > $tmp_dir/scriptnames.txt | silent scriptnames | redir END" -c q
-
     cat $tmp_dir/scriptnames.txt | grep "NERD_tree.vim"
   }
 
@@ -26,8 +30,6 @@ setup() {
 @test "$LABEL supports toml syntax" {
 
   supports_toml() {
-    vim test.toml -c "redir > $tmp_dir/test-toml.txt | silent set filetype? | redir END" -c q
-
     cat $tmp_dir/test-toml.txt | grep toml
   }
 
@@ -36,6 +38,18 @@ setup() {
   [ "$status" == "0" ] || solution "vim/install-vim-toml.sh"
 }
 
-teardown() {
+@test "$LABEL uses Ctrl+S to write changes on current buffer" {
+  maps_ctrl_s() {
+    cat $tmp_dir/nmap.txt | grep -i "<C-S>" | grep ":w<CR>" &&
+    cat $tmp_dir/imap.txt | grep -i "<C-S>" | grep ":w<CR>" &&
+    cat $tmp_dir/vmap.txt | grep -i "<C-S>" | grep ":w<CR>"
+  }
+
+  run maps_ctrl_s
+
+  [ "$status" == "0" ] || solution "vim/ctrl-s-writes-buffer.sh"
+}
+
+teardown_file() {
   rm -rf $tmp_dir
 }

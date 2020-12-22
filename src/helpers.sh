@@ -23,14 +23,21 @@ function get_os {
   eval "$1=$os_name"
 }
 
-wrap_solution() {
-    cat << EOF
+wrap_solution() { 
 
-###
-# Solution: $(basename ${BASH_SOURCE[1]})
-###
+  C="#"
+  if [ "$#" -eq "2" ];
+  then
+    C=$2
+  fi
+  
+  cat << EOF
+
+$C$C$C
+$C Solution: $(basename ${BASH_SOURCE[1]})
+$C$C$C
 $($1)
-## end
+$C$C end
 EOF
 
   }

@@ -13,6 +13,7 @@ setup_file() {
       -c "redir > $tmp_dir/vmap.txt        | silent vmap        | redir END" \
       -c "edit $tmp_dir/test.toml" \
       -c "redir > $tmp_dir/test-toml.txt | silent set filetype? | redir END" \
+      -c "redir > $tmp_dir/diagnostics.txt | echo \"swapfile:\" &swapfile | redir END" \
       -c q
 }
 
@@ -48,6 +49,17 @@ setup_file() {
   run maps_ctrl_s
 
   [ "$status" == "0" ] || solution "vim/ctrl-s-writes-buffer.sh"
+}
+
+@test "$LABEL swapfile is turned off" {
+
+  swap_is_off() {
+    cat $tmp_dir/diagnostics.txt | grep "swapfile: 0"
+  }
+
+  run swap_is_off
+
+  [ "$status" == "0" ] || solution "vim/disable-swapfile.sh"
 }
 
 teardown_file() {

@@ -67,6 +67,18 @@ setup_file() {
   [ "$status" -eq 0 ] || solution "tmux/dash-pipe-split-windows.sh"
 }
 
+@test "$LABEL new splits use the same working directory" {
+
+  check_pwd_on_split() {
+    tmux list-keys | grep "split-window -v" | grep "\-c \"#{pane_current_path}\"" &&
+    tmux list-keys | grep "split-window -h" | grep "\-c \"#{pane_current_path}\""
+  }
+
+  run check_pwd_on_split
+
+  [ "$status" -eq 0 ] || solution "tmux/same-pwd-on-window-split.sh"
+}
+
 
 teardown_file() {
   tmux kill-session -t base-box-test

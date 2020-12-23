@@ -55,6 +55,19 @@ setup_file() {
   [ "$status" -eq 0 ] || solution "tmux/enable-mouse-support.sh"
 }
 
+@test "$LABEL uses -,| to split window" {
+
+  check_dash_pipe_split_window () {
+    tmux list-keys | grep "bind-key" | grep " - " | grep "split-window -v" &&
+    tmux list-keys | grep "bind-key" | grep " | " | grep "split-window -h"
+  }
+
+  run check_dash_pipe_split_window
+
+  [ "$status" -eq 0 ] || solution "tmux/dash-pipe-split-windows.sh"
+}
+
+
 teardown_file() {
   tmux kill-session -t base-box-test
 }

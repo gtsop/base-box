@@ -7,6 +7,7 @@ echo "1) Cross-platform checks"
 echo ""
 bats acceptance.bats
 bats spec/bash.bats
+bats spec/misc.bats
 bats spec/tmux.bats
 bats spec/vim.bats
 
